@@ -26,12 +26,12 @@ jobs:
     outputs:
       projects: ${{ steps.scan.outputs.projects }}
     steps:
-      - name: Checkout upstream (deploy key)
+      - name: Checkout upstream
         uses: actions/checkout@v4
         with:
           repository: ${{ env.UPSTREAM_REPO }}
           ref: ${{ env.UPSTREAM_BRANCH }}
-          ssh-key: ${{ secrets.UPSTREAM_DEPLOY_KEY }}
+          token: ${{ secrets.UPSTREAM_PAT }}
 
       - name: Clone user repository
         run: |
@@ -57,12 +57,12 @@ jobs:
         project: ${{ fromJson(needs.discover.outputs.projects) }}
 
     steps:
-      - name: Checkout upstream (deploy key)
+      - name: Checkout upstream
         uses: actions/checkout@v4
         with:
           repository: ${{ env.UPSTREAM_REPO }}
           ref: ${{ env.UPSTREAM_BRANCH }}
-          ssh-key: ${{ secrets.UPSTREAM_DEPLOY_KEY }}
+          token: ${{ secrets.UPSTREAM_PAT }}
 
       - name: Cache apt packages
         uses: actions/cache@v4

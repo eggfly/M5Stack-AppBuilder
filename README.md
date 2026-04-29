@@ -14,24 +14,14 @@ The upstream `m5stack/CardputerZero-AppBuilder` is a private repository with lim
 
 ## Setup
 
-A **deploy key** or **PAT** is required to clone the private upstream repo during CI.
-
-### Option A: Deploy Key (recommended, least privilege)
-
-1. Generate an SSH key pair:
-   ```bash
-   ssh-keygen -t ed25519 -C "ci-cardputerzero-appbuilder" -f deploy_key -N ""
-   ```
-2. Add the **public key** (`deploy_key.pub`) as a **Deploy Key** in [m5stack/CardputerZero-AppBuilder](https://github.com/m5stack/CardputerZero-AppBuilder/settings/keys) → Settings → Deploy keys → Add deploy key (read-only)
-3. Add the **private key** (`deploy_key`) as a **Secret** in this repo → Settings → Secrets and variables → Actions → New repository secret, name it `UPSTREAM_DEPLOY_KEY`
-4. Delete the local key files after setup
-
-### Option B: Personal Access Token (PAT)
+A **Fine-grained PAT** is required to clone the private upstream repo during CI.
 
 1. Create a [Fine-grained PAT](https://github.com/settings/tokens?type=beta) with:
-   - Repository access: `m5stack/CardputerZero-AppBuilder` only
+   - Resource owner: `m5stack`
+   - Repository access: Only select repositories → `m5stack/CardputerZero-AppBuilder`
    - Permissions: Contents → Read-only
-2. Add as secret `UPSTREAM_PAT` in this repo
+   - Expiration: 1 year (max)
+2. Add as secret `UPSTREAM_PAT` in this repo → Settings → Secrets and variables → Actions → New repository secret
 
 ## Workflows
 
